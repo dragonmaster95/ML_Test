@@ -19,7 +19,20 @@ restService.post("/getData", function(req,res) {
   //var segmentId=req.param("segmentId");
   var returnValue=null;
 
-  $.ajax({
+  var request = new XMLHttpRequest();
+
+request.open("GET","https://app.ticketmaster.com/discovery/v2/events?apikey=deGiQuANy4Xb6RVKKcHxA5GdmH9KYGyt&locale=*&segmentId=KZFzniwnSyZfZ7v7nJ");
+request.addEventListener('load', function(event) {
+   if (request.status >= 200 && request.status < 300) {
+      console.log(request.responseText);
+      //returnValue=request.responseText;
+   } else {
+      console.warn(request.statusText, request.responseText);
+   }
+});
+request.send();
+
+  /*$.ajax({
     type:"GET",
     url:"https://app.ticketmaster.com/discovery/v2/events?apikey=deGiQuANy4Xb6RVKKcHxA5GdmH9KYGyt&locale=*&segmentId=KZFzniwnSyZfZ7v7nJ",
     async:false,
@@ -32,7 +45,7 @@ restService.post("/getData", function(req,res) {
     error: function(xhr, status, err) {
   			  console.log(err);
   		   }
-  });
+  });*/
 
   return res.json({
     fulfillmentText: "Test"
