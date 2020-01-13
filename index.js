@@ -16,12 +16,12 @@ restService.use(bodyParser.json());
 restService.post("/getData", function(req,res) {
 
 
-  var segmentId=req.param("segmentId");
+  //var segmentId=req.param("segmentId");
   var returnValue=null;
 
   $.ajax({
     type:"GET",
-    url:"https://app.ticketmaster.com/discovery/v2/events?apikey=deGiQuANy4Xb6RVKKcHxA5GdmH9KYGyt&locale=*&segmentId="+segmentId,
+    url:"https://app.ticketmaster.com/discovery/v2/events?apikey=deGiQuANy4Xb6RVKKcHxA5GdmH9KYGyt&locale=*&segmentId=KZFzniwnSyZfZ7v7nJ",
     async:false,
     dataType: "json",
     success: function(json) {
@@ -35,7 +35,7 @@ restService.post("/getData", function(req,res) {
   });
 
   return res.json({
-    fulfillmentText: returnValue
+    fulfillmentText: "Test"
   });
     /*res.json({
     payload: speechResponse,
