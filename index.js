@@ -13,6 +13,36 @@ restService.use(
 
 restService.use(bodyParser.json());
 
+restService.post("/getData", function(req,res) {
+  var segmentId=req.param("segmentId");
+  var returnValue=null;
+
+  $.ajax({
+    type:"GET",
+    url:"https://app.ticketmaster.com/discovery/v2/events?apikey=deGiQuANy4Xb6RVKKcHxA5GdmH9KYGyt&locale=*&segmentId="+segmentId,
+    async:false,
+    dataType: "json",
+    success: function(json) {
+          //getEvents.json = json;
+          //showEvents(json);
+          returnValue=json;
+  		   },
+    error: function(xhr, status, err) {
+  			  console.log(err);
+  		   }
+  });
+
+  return returnValue;/*res.json({
+    payload: speechResponse,
+    //data: speechResponse,
+    fulfillmentText: speech,
+    speech: speech,
+    displayText: speech,
+    source: "webhook-echo-sample"
+  });*/
+
+})
+
 restService.post("/echo", function(req, res) {
   var speech =
     req.body.queryResult &&
