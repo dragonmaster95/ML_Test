@@ -14,6 +14,14 @@ restService.use(
 restService.use(bodyParser.json());
 
 restService.post("/getData", function(req,res) {
+  return res.json({
+    //data: speechResponse,
+    fulfillmentText: "testfullfilment",
+    speech: "Testspeech",
+    displayText: "testdisplaytext",
+    source: "webhook-getdata"
+  });
+
   var segmentId=req.param("segmentId");
   var returnValue=null;
 
@@ -42,6 +50,12 @@ restService.post("/getData", function(req,res) {
   });*/
 
 })
+
+
+
+
+
+
 
 restService.post("/echo", function(req, res) {
   var speech =
