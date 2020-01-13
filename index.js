@@ -19,7 +19,35 @@ restService.post("/getData", function(req,res) {
   //var segmentId=req.param("segmentId");
   var returnValue=null;
 
-  var request = new XMLHttpRequest();
+  // Set up our HTTP request
+var xhr = new XMLHttpRequest();
+
+// Setup our listener to process completed requests
+xhr.onload = function () {
+
+    // Process our return data
+    if (xhr.status >= 200 && xhr.status < 300) {
+        // What do when the request is successful
+        console.log('success!', xhr);
+        return res.json({
+          fulfillmentText: "Test"
+        });
+    } else {
+        // What do when the request fails
+        console.log('The request failed!');
+    }
+
+    // Code that should run regardless of the request status
+    console.log('This always runs...');
+};
+
+// Create and send a GET request
+// The first argument is the post type (GET, POST, PUT, DELETE, etc.)
+// The second argument is the endpoint URL
+xhr.open('GET', 'https://app.ticketmaster.com/discovery/v2/events?apikey=deGiQuANy4Xb6RVKKcHxA5GdmH9KYGyt&locale=*&segmentId=KZFzniwnSyZfZ7v7nJ');
+xhr.send();
+
+  /*var request = new XMLHttpRequest();
 
 request.open("GET","https://app.ticketmaster.com/discovery/v2/events?apikey=deGiQuANy4Xb6RVKKcHxA5GdmH9KYGyt&locale=*&segmentId=KZFzniwnSyZfZ7v7nJ");
 request.addEventListener('load', function(event) {
@@ -30,7 +58,7 @@ request.addEventListener('load', function(event) {
       console.warn(request.statusText, request.responseText);
    }
 });
-request.send();
+request.send();*/
 
   /*$.ajax({
     type:"GET",
@@ -47,9 +75,7 @@ request.send();
   		   }
   });*/
 
-  return res.json({
-    fulfillmentText: "Test"
-  });
+
     /*res.json({
     payload: speechResponse,
     //data: speechResponse,
