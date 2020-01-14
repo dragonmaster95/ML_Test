@@ -26,7 +26,7 @@ app.post('/', function(request, response) {
 
   function konzert(agent) {
     let konzert = agent.parameters.Konzert;
-    return axios.get(API_URL+"search.php?s="+ ancodeURLComponent(konzert));
+    return axios.get(API_URL+"search.php?s="+ encodeURLComponent(konzert));
     return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nJ')
       .then(function(result) {
         let events = result.data._embedded.events;
