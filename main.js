@@ -44,7 +44,7 @@ app.post('/', function(request, response) {
 
   function searchKonzert(agent) {
     let konzert = agent.parameters.Konzert;
-    return axios.get(API_URL+'&segmentId=KZFzniwnSyZfZ7v7nJ&q='+ encodeURIComponent(konzert)
+    return axios.get(API_URL+'&segmentId=KZFzniwnSyZfZ7v7nJ&q='+ encodeURIComponent(konzert))
       .then(function(result) {
         let events = result.data._embedded.events;
         if (!events) {
