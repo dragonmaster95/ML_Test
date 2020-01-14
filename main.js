@@ -1,11 +1,14 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 const {WebhookClient} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
+const axios = require('axios');
+
+const API_URL = "https://app.ticketmaster.com/discovery/v2/events?apikey=deGiQuANy4Xb6RVKKcHxA5GdmH9KYGyt&locale=*":
 
 app.get('/', function(req,res) {
   res.send('Hello World!');
@@ -21,7 +24,25 @@ app.post('/', function(request, response) {
     agent.add(`Hello World2!`);
   }
 
-  function test(agent) {
+  function konzert(agent) {
+    axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nJ')
+      .then(function(result) {
+        let konzerte = result.body._embedded.events;
+        if (!konzerte) {
+          agent.add(`Something went wrong! No konzert found.`);
+          return;
+        }        
+        let konzert = konzerte[0];
+        let name = konzert.name;
+        let info = konzert.info;
+
+        agent.add("Konzert: "+name+"\nInfo: "+info);
+
+      });
+  }
+
+  function sport(agent) {
+    axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nJ')
     agent.add(`Hello World2asdasd!`);
   }
  
@@ -34,8 +55,8 @@ app.post('/', function(request, response) {
   let intentMap = new Map();
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
-  intentMap.set('Konzert', test);
-  intentMap.set('Sport', test);
+  intentMap.set('Konzert', konzert);
+  intentMap.set('Sport', sport);
   agent.handleRequest(intentMap);
 });
 
