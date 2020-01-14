@@ -25,14 +25,14 @@ app.post('/', function(request, response) {
   }
 
   function konzert(agent) {
-    axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nJ')
+    return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nJ')
       .then(function(result) {
-        let konzerte = result.data._embedded.events;
-        if (!konzerte) {
-          agent.add(`Something went wrong! No konzert found.`);
+        let events = result.data._embedded.events;
+        if (!events) {
+          agent.add(`Something went wrong! No concert found.`);
           return;
         }        
-        let konzert = konzerte[0];
+        let konzert = events[0];
         let name = konzert.name;
         let info = konzert.info;
 
