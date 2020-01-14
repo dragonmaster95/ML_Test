@@ -1,14 +1,17 @@
 {
   "name": "webhook-echo-sample",
   "version": "1.0.0",
-  "description": "Webhook echo sample",
+  "description": "Webhook example",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "author": "Sunil Syal",
-  "dependencies": {
-    "body-parser": "^1.15.0",
-    "express": "^4.13.4"
-  }
+   "dependencies": {
+      "actions-on-google": "^2.12.0",
+      "body-parser": "^1.19.0",
+      "dialogflow": "^1.1.1",
+      "dialogflow-fulfillment": "^0.6.1",
+      "express": "^4.17.1"
+   }
 }
