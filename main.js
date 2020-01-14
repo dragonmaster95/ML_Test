@@ -25,6 +25,8 @@ app.post('/', function(request, response) {
   }
 
   function konzert(agent) {
+    let konzert = agent.parameters.Konzert;
+    return axios.get(API_URL+"search.php?s="+ ancodeURLComponent(konzert));
     return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nJ')
       .then(function(result) {
         let events = result.data._embedded.events;
@@ -56,6 +58,7 @@ app.post('/', function(request, response) {
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
   intentMap.set('Konzert', konzert);
+  intentMap.set('GetKonzert', konzert);
   intentMap.set('Sport', sport);
   agent.handleRequest(intentMap);
 });
