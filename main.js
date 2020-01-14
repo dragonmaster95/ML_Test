@@ -27,7 +27,7 @@ app.post('/', function(request, response) {
   function konzert(agent) {
     axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nJ')
       .then(function(result) {
-        let konzerte = result.body._embedded.events;
+        let konzerte = result.data._embedded.events;
         if (!konzerte) {
           agent.add(`Something went wrong! No konzert found.`);
           return;
