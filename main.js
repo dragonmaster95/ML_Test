@@ -26,8 +26,25 @@ app.post('/', function(request, response) {
 
   function konzert(agent) {
     let konzert = agent.parameters.Konzert;
-    return axios.get(API_URL+"search.php?s="+ encodeURIComponent(konzert));
     return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nJ')
+      .then(function(result) {
+        let events = result.data._embedded.events;
+        if (!events) {
+          agent.add(`Something went wrong! No concert found.`);
+          return;
+        }        
+        let konzert = events[0];
+        let name = konzert.name;
+        let info = konzert.info;
+
+        agent.add("Konzert: "+name+"\nInfo: "+info);
+
+      });
+  }
+
+  function searchKonzert(agent) {
+    let konzert = agent.parameters.Konzert;
+    return axios.get(API_URL+'&segmentId=KZFzniwnSyZfZ7v7nJ&q='+ encodeURIComponent(konzert)
       .then(function(result) {
         let events = result.data._embedded.events;
         if (!events) {
