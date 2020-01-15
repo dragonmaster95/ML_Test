@@ -61,8 +61,20 @@ app.post('/', function(request, response) {
   }
 
   function sport(agent) {
-    axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nJ')
-    agent.add(`Hello World2asdasd!`);
+    return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nE')
+    .then(function(result) {
+      let events = result.data._embedded.events;
+      if (!events) {
+        agent.add(`Something went wrong! No concert found.`);
+        return;
+      }        
+      let sport = events[0];
+      let name = sport.name;
+      let url = sport.url;
+
+      agent.add("Sport: "+name+"\nURL: "+url);
+
+    });
   }
  
   function fallback(agent) {
