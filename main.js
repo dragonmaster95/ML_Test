@@ -46,7 +46,7 @@ app.post('/', function(request, response) {
           }
         });
         agent.add("Image: ");
-        //agent.add(new Image(konzertImage))
+        agent.add(new Image(konzertImage))
 
       });
   }
