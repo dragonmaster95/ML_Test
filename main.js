@@ -45,7 +45,8 @@ app.post('/', function(request, response) {
             konzertImage=new Image(konzert.images[0].url);
           }
         });
-        agent.add(new Image(konzertImage))
+        agent.add("Image: ");
+        //agent.add(new Image(konzertImage))
 
       });
   }
