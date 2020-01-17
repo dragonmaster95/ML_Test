@@ -37,9 +37,8 @@ app.post('/', function(request, response) {
         events.forEach(function(konzert) {
           console.log(konzert);
           let name = konzert.name;
-          let info = konzert.info;
-          let date = konzert.dates.start.localDate+" "+konzert.dates.start.localTime;
-          konzerts += (name +" "+ info +" "+ date+"<br>");
+          let date = (konzert.dates.start.localDate ?? "") +" "+(konzert.dates.start.localTime ?? "");
+          konzerts += (name +" "+ date+"\n");
 
           let konzertImage;
           if (konzert.images) {
