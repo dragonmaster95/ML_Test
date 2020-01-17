@@ -45,14 +45,15 @@ app.post('/', function(request, response) {
 
           let konzertImage;
           if (konzert.images) {
-            konzertImage=konzert.images[0].url;
+            konzertImage=new Image(konzert.images[0].url);
           }
           agent.add(konzerts);
-          agent.add(new Card({
+          /*agent.add(new Card({
             title: konzert.name,
             imageURL: konzertImage,
             text: "This is a test"
-          }));
+          }));*/
+          agent.add(konzertImage);
         });
       });
   } 
