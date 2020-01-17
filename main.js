@@ -41,12 +41,13 @@ app.post('/', function(request, response) {
           let date = "";
           if (konzert.dates.start.localDate) date +=" "+ konzert.dates.start.localDate;
           if (konzert.dates.start.localTime) date +=" "+ konzert.dates.start.localTime;
-          konzerts += (name +" "+ info +" "+ date+"<br>");
+          konzerts += (name +" "+ date+"\n");
 
           let konzertImage;
           if (konzert.images) {
             konzertImage=new Image(konzert.images[0].url);
           }
+          agent.add(konzerts);
         });
         agent.add(konzerts);
       });
