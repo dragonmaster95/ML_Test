@@ -34,7 +34,7 @@ app.post('/', function(request, response) {
           return;
         }        
         let konzertImage;
-        let card=new Card();
+        /*let card=new Card();
         events.forEach(function(konzert) {
           console.log(konzert);
           let name = konzert.name;
@@ -49,66 +49,13 @@ app.post('/', function(request, response) {
           card.title=konzert.name;
           card.imageUrl=konzertImage;
           card.text=date;
-        });
-        agent.add(card);
+        });*/
+        agent.add(new Card({
+          title: "Test"
+        })
+        );
       });
-  }
-
-  function searchKonzert(agent) {
-    let konzert = agent.parameters.Konzert;
-    return axios.get(API_URL+'&segmentId=KZFzniwnSyZfZ7v7nJ&q='+ encodeURIComponent(konzert))
-      .then(function(result) {
-        let events = result.data._embedded.events;
-        if (!events) {
-          agent.add(`Something went wrong! No concert found.`);
-          return;
-        }        
-        let konzertList;
-		events.forEach(function(konzert) {
-			console.log(konzert);
-			let name = konzert.name;
-			let info = konzert.info;
-			let date = konzert.dates.start.localDate+" "+konzert.dates.start.localTime;
-			
-			let konzertImage;
-			if (konzert.images) {
-				konzertImage=new Image(images[0].url);
-			}
-			
-			//konzertList=
-			
-			/*conv.ask(new BrowseCarousel({
-				items: [
-				  new BrowseCarouselItem({
-					title: 'Title of item 1',
-					url: 'https://example.com',
-					description: 'Description of item 1',
-					image: new Image({
-					  url: 'https://storage.googleapis.com/actionsresources/logo_assistant_2x_64dp.png',
-					  alt: 'Image alternate text',
-					}),
-					footer: 'Item 1 footer',
-				  }),
-				  new BrowseCarouselItem({
-					title: 'Title of item 2',
-					url: 'https://example.com',
-					description: 'Description of item 2',
-					image: new Image({
-					  url: 'https://storage.googleapis.com/actionsresources/logo_assistant_2x_64dp.png',
-					  alt: 'Image alternate text',
-					}),
-					footer: 'Item 2 footer',
-				  }),
-				],
-			  }));*/
-  
-			agent.add("Konzert: "+name+"\nDate: "+date);
-		});
-
-        //agent.add("Konzert: "+name+"\nInfo: "+info);
-
-      });
-  }
+  } 
 
   function sport(agent) {
     return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nE')
