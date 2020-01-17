@@ -25,7 +25,6 @@ app.post('/', function(request, response) {
   }
 
   function konzert(agent) {
-    console.log(agent.parameters);
     let konzert = agent.parameters.Konzert;
     return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nJ'+ '&city='+agent.parameters.city)
       .then(function(result) {
@@ -35,6 +34,7 @@ app.post('/', function(request, response) {
           return;
         }        
         let konzertImage;
+        let card=new Card();
         events.forEach(function(konzert) {
           console.log(konzert);
           let name = konzert.name;
@@ -45,8 +45,12 @@ app.post('/', function(request, response) {
           if (konzert.images) {
             konzertImage=new Image(konzert.images[0].url);
           }
+
+          card.title=konzert.name;
+          card.imageUrl=konzertImage;
+          card.text=date;
         });
-        agent.add("Image: ");
+        agent.add(card);
       });
   }
 
