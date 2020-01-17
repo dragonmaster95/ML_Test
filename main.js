@@ -45,11 +45,12 @@ app.post('/', function(request, response) {
           if (konzert.images) {
             konzertImage=konzert.images[0].url;
           }
+          else konzertImage = null;
           agent.add(konzertOutput);
           agent.add(new Card({
             title: konzert.name,
             imageURL: konzertImage,
-            text: "This is a test"
+            text: date +"\n" +konzert.venues[0].name
           }));
           agent.add(new Image(konzertImage));
         });
