@@ -39,7 +39,7 @@ app.post('/', function(request, response) {
           let date = "";
           if (konzert.dates.start.localDate) date +=" "+ konzert.dates.start.localDate;
           if (konzert.dates.start.localTime) date +=" "+ konzert.dates.start.localTime;
-          let konzertOutput = (name +" "+ date+"\n");
+          let konzertOutput = name +" "+ date;
 
           let konzertImage;
           if (konzert.images) {
