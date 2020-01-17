@@ -56,7 +56,7 @@ app.post('/', function(request, response) {
           agent.add(new Card({
             title: konzert.name,
             imageURL: konzertImage,
-            text: date +"\n" +konzertVenues;
+            text: date +"\n" +konzertVenues
           }));
           agent.add(new Image(konzertImage));
         });
