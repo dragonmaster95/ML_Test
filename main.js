@@ -41,7 +41,7 @@ app.post('/', function(request, response) {
           
           let konzertImage;
           if (konzert.images) {
-            konzertImage=new Image(images[0].url);
+            konzertImage=new Image(konzert.images[0].url);
           }
         agent.add("Konzert: "+name+"\nDate: "+date);
         });
