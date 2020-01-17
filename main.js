@@ -37,7 +37,7 @@ app.post('/', function(request, response) {
         let name = konzert.name;
         let info = konzert.info;
 
-        agent.add("Konzert: "+name+"\nInfo: "+info);
+        agent.add("Konzert: "+name+"\nDate: "+date);
 
       });
   }
