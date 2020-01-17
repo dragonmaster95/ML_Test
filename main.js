@@ -33,27 +33,20 @@ app.post('/', function(request, response) {
           agent.add(`Something went wrong! No concert found.`);
           return;
         }        
-        let konzertImage;
-        /*let card=new Card();
+        let konzerts = "";
         events.forEach(function(konzert) {
           console.log(konzert);
           let name = konzert.name;
           let info = konzert.info;
           let date = konzert.dates.start.localDate+" "+konzert.dates.start.localTime;
-          
-          //let konzertImage;
+          konzerts += (name +" "+ info +" "+ date+"<br>");
+
+          let konzertImage;
           if (konzert.images) {
             konzertImage=new Image(konzert.images[0].url);
           }
-
-          card.title=konzert.name;
-          card.imageUrl=konzertImage;
-          card.text=date;
-        });*/
-        agent.add(new Card({
-          title: "Test"
-        })
-        );
+        });
+        agent.add(konzerts);
       });
   } 
 
@@ -76,7 +69,7 @@ app.post('/', function(request, response) {
  
   function fallback(agent) {
     agent.add(`I didn't understand`);
-    agent.add(`I'm sorry, can you try again?`);
+    //agent.add(`I'm sorry, can you try again?`);
   }
 
   // Run the proper function handler based on the matched Dialogflow intent name
