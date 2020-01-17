@@ -46,11 +46,17 @@ app.post('/', function(request, response) {
             konzertImage=konzert.images[0].url;
           }
           else konzertImage = null;
+          
+          let konzertVenues;
+          if (konzert.venues[0].name) {
+            konzertVenues = konzert.venues[0].name;
+          }
+          else konzertVenues = null;
           agent.add(konzertOutput);
           agent.add(new Card({
             title: konzert.name,
             imageURL: konzertImage,
-            text: date +"\n" +konzert.venues[0].name
+            text: date +"\n" +konzertVenues;
           }));
           agent.add(new Image(konzertImage));
         });
