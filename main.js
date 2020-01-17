@@ -33,18 +33,19 @@ app.post('/', function(request, response) {
           agent.add(`Something went wrong! No concert found.`);
           return;
         }        
+        let konzertImage;
         events.forEach(function(konzert) {
           console.log(konzert);
           let name = konzert.name;
           let info = konzert.info;
           let date = konzert.dates.start.localDate+" "+konzert.dates.start.localTime;
           
-          let konzertImage;
+          //let konzertImage;
           if (konzert.images) {
             konzertImage=new Image(konzert.images[0].url);
           }
-        agent.add("Konzert: "+name+"\nDate: "+date);
         });
+        agent.add(new Image(konzertImage))
 
       });
   }
