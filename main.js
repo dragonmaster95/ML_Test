@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-const {WebhookClient} = require('dialogflow-fulfillment');
+const {WebhookClient, Image} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 const axios = require('axios');
 
@@ -51,11 +51,49 @@ app.post('/', function(request, response) {
           agent.add(`Something went wrong! No concert found.`);
           return;
         }        
-        let konzert = events[0];
-        let name = konzert.name;
-        let info = konzert.info;
+        let konzertList;
+		events.forEach(function(konzert) {
+			console.log(konzert);
+			let name = konzert.name;
+			let info = konzert.info;
+			let date = konzert.dates.start.localDate+" "+konzert.dates.start.localTime;
+			
+			let konzertImage;
+			if (konzert.images) {
+				konzertImage=new Image(images[0].url);
+			}
+			
+			//konzertList=
+			
+			/*conv.ask(new BrowseCarousel({
+				items: [
+				  new BrowseCarouselItem({
+					title: 'Title of item 1',
+					url: 'https://example.com',
+					description: 'Description of item 1',
+					image: new Image({
+					  url: 'https://storage.googleapis.com/actionsresources/logo_assistant_2x_64dp.png',
+					  alt: 'Image alternate text',
+					}),
+					footer: 'Item 1 footer',
+				  }),
+				  new BrowseCarouselItem({
+					title: 'Title of item 2',
+					url: 'https://example.com',
+					description: 'Description of item 2',
+					image: new Image({
+					  url: 'https://storage.googleapis.com/actionsresources/logo_assistant_2x_64dp.png',
+					  alt: 'Image alternate text',
+					}),
+					footer: 'Item 2 footer',
+				  }),
+				],
+			  }));*/
+  
+			agent.add("Konzert: "+name+"\nDate: "+date);
+		});
 
-        agent.add("Konzert: "+name+"\nInfo: "+info);
+        //agent.add("Konzert: "+name+"\nInfo: "+info);
 
       });
   }
