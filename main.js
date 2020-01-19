@@ -29,7 +29,7 @@ app.post('/', function(request, response) {
     return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nJ'+ '&city='+agent.parameters.city)
       .then(function(result) {
         let events = result.data._embedded.events;
-        if (!konzert || !events) {
+        if (!events) {
           agent.add(`Something went wrong! No concert found.`);
           return;
         }        
@@ -56,7 +56,7 @@ app.post('/', function(request, response) {
           agent.add(new Card({
             title: konzert.name,
             imageURL: konzertImage,
-            text: date +"\n" +konzertVenues
+            text: date +"\n" +konzert.venues[0].name
           }));
           agent.add(new Image(konzertImage));
         });
@@ -64,7 +64,6 @@ app.post('/', function(request, response) {
   } 
 
   function sport(agent) {
-    let sport = agent.parameters.Sport
     return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nE')
     .then(function(result) {
       let events = result.data._embedded.events;
@@ -72,33 +71,12 @@ app.post('/', function(request, response) {
         agent.add(`Something went wrong! No concert found.`);
         return;
       }        
-      events.forEach(function(sport) {
-        console.log(sport);
-        let name = sport.name;
-        let date = "";
-        if (sport.dates.start.localDate) date +=" "+ sport.dates.start.localDate;
-        if (sport.dates.start.localTime) date +=" "+ sport.dates.start.localTime;
-        let sportOutput = name +" "+ date;
+      let sport = events[0];
+      let name = sport.name;
+      let url = sport.url;
 
-        let sportImage;
-        if (sport.images) {
-          sportImage=sport.images[0].url;
-        }
-        else sportImage = null;
-        
-        let sportVenues;
-        if (sport.venues[0].name) {
-          sportVenues = sport.venues[0].name;
-        }
-        else sportVenues = null;
-        agent.add(sportOutput);
-        agent.add(new Card({
-          title: sport.name,
-          imageURL: sportImage,
-          text: date +"\n" +sportVenues
-        }));
-        agent.add(new Image(sportImage));
-      });
+      agent.add("Sport: "+name+"\nURL: "+url);
+
     });
   }
  
@@ -112,6 +90,7 @@ app.post('/', function(request, response) {
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
   intentMap.set('Konzert', konzert);
+  intentMap.set('GetKonzert', konzert);
   intentMap.set('Sport', sport);
   agent.handleRequest(intentMap);
 });
