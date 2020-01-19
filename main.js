@@ -64,7 +64,7 @@ app.post('/', function(request, response) {
 
   function sport(agent) {
     let sport = agent.parameters.Sport
-    return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nE')
+    return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nE' + '&city='+agent.parameters.city)
     .then(function(result) {
       let events = result.data._embedded.events;
       if (!sport || !events) {
