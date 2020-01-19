@@ -85,16 +85,16 @@ app.post('/', function(request, response) {
         }
         else sportImage = null;
         
-        let sportVenues;
+        /*let sportVenues;
         if (sport.venues[0].name) {
           sportVenues = sport.venues[0].name;
         }
-        else sportVenues = null;
+        else sportVenues = null;*/
         agent.add(sportOutput);
         agent.add(new Card({
           title: sport.name,
           imageURL: sportImage,
-          text: date +"\n" +sportVenues
+          text: date
         }));
         agent.add(new Image(sportImage));
       });
