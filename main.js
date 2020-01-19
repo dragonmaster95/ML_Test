@@ -67,7 +67,7 @@ app.post('/', function(request, response) {
     return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nE' + '&city='+agent.parameters.city)
     .then(function(result) {
       let events = result.data._embedded.events;
-      if (!sport || !events) {
+      if (!events) {
         agent.add(`No sport event was found.`);
         return;
       }        
