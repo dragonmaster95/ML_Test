@@ -25,8 +25,8 @@ app.post('/', function(request, response) {
   }
 
   function konzert(agent) {
-    let konzert = agent.parameters.Konzert;
-    return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nJ'+ '&city='+agent.parameters.city)
+    //let konzert = agent.parameters.Konzert;
+    return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nJ' + '&city='+agent.parameters.city)
       .then(function(result) {
         let events = result.data._embedded.events;
         if (!events) {
@@ -63,7 +63,7 @@ app.post('/', function(request, response) {
   } 
 
   function sport(agent) {
-    let sport = agent.parameters.Sport
+    //let sport = agent.parameters.Sport
     return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nE' + '&city='+agent.parameters.city)
     .then(function(result) {
       let events = result.data._embedded.events;
