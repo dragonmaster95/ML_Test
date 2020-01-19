@@ -29,7 +29,7 @@ app.post('/', function(request, response) {
     return axios.get(API_URL + '&segmentId=KZFzniwnSyZfZ7v7nJ'+ '&city='+agent.parameters.city)
       .then(function(result) {
         let events = result.data._embedded.events;
-        if (!events) {
+        if (!konzert || !events) {
           agent.add(`Something went wrong! No concert found.`);
           return;
         }        
